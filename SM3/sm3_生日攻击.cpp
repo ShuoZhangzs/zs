@@ -6,7 +6,7 @@ using namespace std;
 
 string bin_to_hex(string str)
 {
-	/*²¹³äÎª4µÄ±¶Êı*/
+	/*è¡¥å……ä¸º4çš„å€æ•°*/
 	while (str.size() % 4 != 0)
 	{
 		str = "0" + str;
@@ -14,9 +14,9 @@ string bin_to_hex(string str)
 
 	string hex = "";
 	int temp = 0;
-	for (int i = 0; i < str.size(); i += 4) //Ã¿4Î»bitÎª1¸ö16½øÖÆ
+	for (int i = 0; i < str.size(); i += 4) //æ¯4ä½bitä¸º1ä¸ª16è¿›åˆ¶
 	{
-		/*ÏÈ×ª»»Îª10Ê®½øÖÆ£¬È»ºóÅĞ¶ÏÊÇ·ñ´óÓÚ10*/
+		/*å…ˆè½¬æ¢ä¸º10åè¿›åˆ¶ï¼Œç„¶ååˆ¤æ–­æ˜¯å¦å¤§äº10*/
 		temp = (str[i] - '0') * 8 + (str[i + 1] - '0') * 4 + (str[i + 2] - '0') * 2 + (str[i + 3] - '0') * 1;
 		if (temp < 10)
 		{
@@ -75,7 +75,7 @@ string shift_left(string str, int step)
 	return bin_to_hex(res);
 }
 
-/*32bitÒì»ò²Ù×÷*/
+/*32bitå¼‚æˆ–æ“ä½œ*/
 string XOR(string str1, string str2)
 {
 	string bin1 = hex_to_bin(str1);
@@ -94,7 +94,7 @@ string XOR(string str1, string str2)
 	return bin_to_hex(res);
 }
 
-/*32bitÓë²Ù×÷*/
+/*32bitä¸æ“ä½œ*/
 string AND(string str1, string str2)
 {
 	string bin1 = hex_to_bin(str1);
@@ -114,7 +114,7 @@ string AND(string str1, string str2)
 	return bin_to_hex(res);
 }
 
-/*32bit»ò²Ù×÷*/
+/*32bitæˆ–æ“ä½œ*/
 string OR(string str1, string str2)
 {
 	string bin1 = hex_to_bin(str1);
@@ -133,7 +133,7 @@ string OR(string str1, string str2)
 	return bin_to_hex(res);
 }
 
-/*32bit·Ç²Ù×÷*/
+/*32bitéæ“ä½œ*/
 string NOT(string str)
 {
 	string bin1 = hex_to_bin(str);
@@ -150,19 +150,19 @@ string NOT(string str)
 	return bin_to_hex(res);
 }
 
-/*1 bitÒì»ò²Ù×÷*/
+/*1 bitå¼‚æˆ–æ“ä½œ*/
 char bit_xor(char str1, char str2)
 {
 	return str1 == str2 ? '0' : '1';
 }
 
-/*1 bitÓë²Ù×÷*/
+/*1 bitä¸æ“ä½œ*/
 char bit_and(char str1, char str2)
 {
 	return (str1 == '1' && str2 == '1') ? '1' : '0';
 }
 
-/*ÔÚmod 2^32ÉÏµÄ¼Ó·¨,str1 str2ÊÇ32bit*/
+/*åœ¨mod 2^32ä¸Šçš„åŠ æ³•,str1 str2æ˜¯32bit*/
 string add_mod(string str1, string str2)
 {
 	string bin1 = hex_to_bin(str1);
@@ -235,7 +235,7 @@ string GG(string str1, string str2, string str3, int j)
 	}
 }
 
-/*ÏûÏ¢Ìî³ä*/
+/*æ¶ˆæ¯å¡«å……*/
 string padding(string message)
 {
 	string padding_res = "";
@@ -245,16 +245,16 @@ string padding(string message)
 	}
 	int length = padding_res.size() * 4;
 
-	/*½«±ÈÌØ1Ìí¼Óµ½ÏûÏ¢Ä©Î²*/
+	/*å°†æ¯”ç‰¹1æ·»åŠ åˆ°æ¶ˆæ¯æœ«å°¾*/
 	padding_res += "8";
 
-	/*0 bitÌî³ä ³É448 mod 512 */
+	/*0 bitå¡«å…… æˆ448 mod 512 */
 	while (padding_res.size() % 128 != 112)
 	{
 		padding_res += "0";
 	}
 
-	/*64Î»bit´®±íÊ¾ÏûÏ¢¶ş½øÖÆ³¤¶È*/
+	/*64ä½bitä¸²è¡¨ç¤ºæ¶ˆæ¯äºŒè¿›åˆ¶é•¿åº¦*/
 	string length_str = dec_to_hex(length);
 	while (length_str.size() != 16)
 	{
@@ -265,8 +265,8 @@ string padding(string message)
 	return padding_res;
 }
 
-/*ÏûÏ¢À©Õ¹*/
-string extension(string str) /*16×Ö ¡ª¡ª> 132×Ö*/
+/*æ¶ˆæ¯æ‰©å±•*/
+string extension(string str) /*16å­— â€”â€”> 132å­—*/
 {
 	string W_132 = str;
 	for (int i = 16; i < 68; i++) //W17-W68
@@ -280,7 +280,7 @@ string extension(string str) /*16×Ö ¡ª¡ª> 132×Ö*/
 	return W_132;
 }
 
-/*Ñ¹Ëõº¯Êı*/
+/*å‹ç¼©å‡½æ•°*/
 string compress(string W, string Vi)
 {
 	string IV = Vi;
@@ -312,10 +312,10 @@ string compress(string W, string Vi)
 	return (A + B + C + D + E + F + G + H);
 }
 
-/*µü´ú*/
+/*è¿­ä»£*/
 string iteration(string str)
 {
-	//µü´ú´ÎÊı
+	//è¿­ä»£æ¬¡æ•°
 	int n = str.size() / 128;
 
 	string V = "7380166F4914B2B9172442D7DA8A0600A96F30BC163138AAE38DEE4DB0FB0E4E";
@@ -326,9 +326,9 @@ string iteration(string str)
 	{
 		Bi = str.substr(i * 128, 128);
 
-		//#1.ÏûÏ¢À©Õ¹
+		//#1.æ¶ˆæ¯æ‰©å±•
 		W_132 = extension(Bi);
-		//#2.Ñ¹Ëõº¯Êı
+		//#2.å‹ç¼©å‡½æ•°
 		ABCDEFGH = compress(W_132, V);
 
 		V = XOR(V, ABCDEFGH);
@@ -349,31 +349,31 @@ int main()
 {
 	clock_t start = clock();
 
-	int n = 16;
+	int n = 2;
 
-	/*timeÊÇÊ¹Åö×²¸ÅÂÊ´ïµ½50%µÄ´ÎÊı*/
-	int times = 0.83 * pow(2, n / 2);
+	/*timeæ˜¯ä½¿ç¢°æ’æ¦‚ç‡è¾¾åˆ°50%çš„æ¬¡æ•°*/
+	int times = 0.83 * pow(2, n * 2);
 	for (int i = 0; i < times; i++)
 	{
-		string m1 = random_string(rand()%n+1);
+		string m1 = random_string(rand() % (8 * n) + 1);
 		string paddind_result1 = padding(m1);
 		string hash1 = iteration(paddind_result1);
 
-		string m2 = random_string(rand()%n+1);
+		string m2 = random_string(rand() % (8 * n) + 1);
 		string paddind_result2 = padding(m2);
 		string hash2 = iteration(paddind_result2);
 		if (hash1.substr(0, n) == hash2.substr(0, n))
 		{
-			cout << "µÚÒ»¸öÏûÏ¢£º" << m1 << endl;
-			cout << "µÚ¶ş¸öÏûÏ¢:" << m2 << endl;
-			cout << n << "bit Åö×²³É¹¦" << endl;
+			cout << "ç¬¬ä¸€ä¸ªæ¶ˆæ¯ï¼š" << m1 << endl;
+			cout << "ç¬¬äºŒä¸ªæ¶ˆæ¯:" << m2 << endl;
+			cout <<"å‰"<< n * 4 << "bit ç¢°æ’æˆåŠŸ" << endl;
 			break;
 		}
 	}
 
 	clock_t end = clock();
 	double timespend = ((double)end - (double)start) / CLOCKS_PER_SEC;
-	cout << "Ê±¼äÏûºÄ:" << timespend << endl;
+	cout << "æ—¶é—´æ¶ˆè€—:" << timespend << endl;
 
 	return 0;
 }
