@@ -24,7 +24,7 @@ string dec_to_hex(int str)
 }
 string bin_to_hex(string str)
 {
-	/*²¹³äÎª4µÄ±¶Êı*/
+	/*è¡¥å……ä¸º4çš„å€æ•°*/
 	while (str.size() % 4 != 0)
 	{
 		str = "0" + str;
@@ -32,9 +32,9 @@ string bin_to_hex(string str)
 
 	string hex = "";
 	int temp = 0;
-	for (int i = 0; i < str.size(); i += 4) //Ã¿4Î»bitÎª1¸ö16½øÖÆ
+	for (int i = 0; i < str.size(); i += 4) //æ¯4ä½bitä¸º1ä¸ª16è¿›åˆ¶
 	{
-		/*ÏÈ×ª»»Îª10Ê®½øÖÆ£¬È»ºóÅĞ¶ÏÊÇ·ñ´óÓÚ10*/
+		/*å…ˆè½¬æ¢ä¸º10åè¿›åˆ¶ï¼Œç„¶ååˆ¤æ–­æ˜¯å¦å¤§äº10*/
 		temp = (str[i] - '0') * 8 + (str[i + 1] - '0') * 4 + (str[i + 2] - '0') * 2 + (str[i + 3] - '0') * 1;
 		if (temp < 10)
 		{
@@ -64,17 +64,17 @@ string hex_to_bin(string str)
 	}
 	return bin;
 }
-/*1 bitÒì»ò²Ù×÷*/
+/*1 bitå¼‚æˆ–æ“ä½œ*/
 char bit_xor(char str1, char str2)
 {
 	return str1 == str2 ? '0' : '1';
 }
-/*1 bitÓë²Ù×÷*/
+/*1 bitä¸æ“ä½œ*/
 char bit_and(char str1, char str2)
 {
 	return (str1 == '1' && str2 == '1') ? '1' : '0';
 }
-/*ÔÚmod 2^32ÉÏµÄ¼Ó·¨,str1 str2ÊÇ32bit*/
+/*åœ¨mod 2^32ä¸Šçš„åŠ æ³•,str1 str2æ˜¯32bit*/
 string add_mod(string str1, string str2)
 {
 	string bin1 = hex_to_bin(str1);
@@ -102,7 +102,7 @@ string add_mod(string str1, string str2)
 	}
 	return bin_to_hex(res);
 }
-/*Ñ­»·ÓÒÒÆ*/
+/*å¾ªç¯å³ç§»*/
 string S(string str, int step)
 {
 	string res = hex_to_bin(str);
@@ -111,7 +111,7 @@ string S(string str, int step)
 	return bin_to_hex(res);
 }
 
-/*ÓÒÒÆ*/
+/*å³ç§»*/
 string R(string str, int step)
 {
 	string res = hex_to_bin(str);
@@ -124,7 +124,7 @@ string R(string str, int step)
 	res = tmp + res.substr(0, len - step);
 	return bin_to_hex(res);
 }
-/*32bitÒì»ò²Ù×÷*/
+/*32bitå¼‚æˆ–æ“ä½œ*/
 string XOR(string str1, string str2)
 {
 	string bin1 = hex_to_bin(str1);
@@ -142,7 +142,7 @@ string XOR(string str1, string str2)
 	}
 	return bin_to_hex(res);
 }
-/*32bitÓë²Ù×÷*/
+/*32bitä¸æ“ä½œ*/
 string AND(string str1, string str2)
 {
 	string bin1 = hex_to_bin(str1);
@@ -161,7 +161,7 @@ string AND(string str1, string str2)
 	}
 	return bin_to_hex(res);
 }
-/*32bit·Ç²Ù×÷*/
+/*32bitéæ“ä½œ*/
 string NOT(string str)
 {
 	string bin1 = hex_to_bin(str);
@@ -187,7 +187,7 @@ string P1(string str)
 	return XOR(XOR(S(str, 17), S(str, 19)), R(str, 10));
 }
 
-/*ÏûÏ¢Ìî³ä*/
+/*æ¶ˆæ¯å¡«å……*/
 string padding(string message)
 {
 	string padding_res = "";
@@ -197,16 +197,16 @@ string padding(string message)
 	}
 	int length = padding_res.size() * 4;
 
-	/*½«±ÈÌØ1Ìí¼Óµ½ÏûÏ¢Ä©Î²*/
+	/*å°†æ¯”ç‰¹1æ·»åŠ åˆ°æ¶ˆæ¯æœ«å°¾*/
 	padding_res += "8";
 
-	/*0 bitÌî³ä ³É448 mod 512 */
+	/*0 bitå¡«å…… æˆ448 mod 512 */
 	while (padding_res.size() % 128 != 112)
 	{
 		padding_res += "0";
 	}
 
-	/*64Î»bit´®±íÊ¾ÏûÏ¢¶ş½øÖÆ³¤¶È*/
+	/*64ä½bitä¸²è¡¨ç¤ºæ¶ˆæ¯äºŒè¿›åˆ¶é•¿åº¦*/
 	string length_str = dec_to_hex(length);
 	while (length_str.size() != 16)
 	{
@@ -217,8 +217,8 @@ string padding(string message)
 	return padding_res;
 }
 
-/*ÏûÏ¢À©Õ¹*/
-string extension(string str) /*16×Ö ¡ª¡ª> 64×Ö*/
+/*æ¶ˆæ¯æ‰©å±•*/
+string extension(string str) /*16å­— â€”â€”> 64å­—*/
 {
 	string W_64 = str;
 	for (int i = 16; i < 64; i++) 
@@ -228,7 +228,7 @@ string extension(string str) /*16×Ö ¡ª¡ª> 64×Ö*/
 	
 	return W_64;
 }
-/*Ñ¹Ëõº¯Êı*/
+/*å‹ç¼©å‡½æ•°*/
 string compress(string W, string hi)
 {
 	string IV = hi;
@@ -245,10 +245,6 @@ string compress(string W, string hi)
 	string s0 = "", maj = "", t2 = "", s1 = "", ch = "", t1 = "";
 	for (int j = 0; j < 64; j++)
 	{
-		if (j == 63)
-		{
-			cout << "hi" << endl;
-		}
 		s0 = XOR(XOR(S(A, 2), S(A, 13)), S(A, 22));
 		maj = XOR(XOR(AND(A, B), AND(A, C)), AND(B, C));
 		t2 = add_mod(s0, maj);
@@ -266,10 +262,10 @@ string compress(string W, string hi)
 	}
 	return add_mod(IV.substr(0, 8), A) + add_mod(IV.substr(8, 8), B) + add_mod(IV.substr(16, 8), C) + add_mod(IV.substr(24, 8), D) + add_mod(IV.substr(32, 8), E) + add_mod(IV.substr(40, 8), F) + add_mod(IV.substr(48, 8), G) + add_mod(IV.substr(56, 8), H);
 }
-/*µü´ú*/
+/*è¿­ä»£*/
 string iteration(string str)
 {
-	//µü´ú´ÎÊı
+	//è¿­ä»£æ¬¡æ•°
 	int n = str.size() / 128;
 	string h = "6a09e667bb67ae853c6ef372a54ff53a510e527f9b05688c1f83d9ab5be0cd19";
 	string Bi = "";
@@ -279,9 +275,9 @@ string iteration(string str)
 	{
 		Bi = str.substr(i * 128, 128);
 
-		//#1.ÏûÏ¢À©Õ¹
+		//#1.æ¶ˆæ¯æ‰©å±•
 		W_64 = extension(Bi);
-		//#2.Ñ¹Ëõº¯Êı
+		//#2.å‹ç¼©å‡½æ•°
 		h=compress(W_64, h);
 	}
 	return h;
@@ -289,14 +285,14 @@ string iteration(string str)
 int main()
 {
 	string message = "lovesong";
-	/*Ëã·¨¹ı³Ì*/
-	//#1.Ìî³ä
+	/*ç®—æ³•è¿‡ç¨‹*/
+	//#1.å¡«å……
 	string paddind_result = padding(message);
-	//#2.µü´ú¹ı³Ì
+	//#2.è¿­ä»£è¿‡ç¨‹
 	string hash = iteration(paddind_result);
 
 
-	cout << "ÔÓ´ÕÖµ£º" << endl;
+	cout << "æ‚å‡‘å€¼ï¼š" << endl;
 	for (int i = 0; i < 8; i++) {
 		cout << hash.substr(i * 8, 8) << "  ";
 	}
